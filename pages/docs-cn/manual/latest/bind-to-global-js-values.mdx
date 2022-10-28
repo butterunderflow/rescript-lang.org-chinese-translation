@@ -4,11 +4,12 @@ description: "JS interop with global JS values in ReScript"
 canonical: "/docs/manual/latest/bind-to-global-js-values"
 ---
 
-# Bind to Global JS Values
+# 绑定全局 JS Values
 
-**First**, make sure the value you'd like to model doesn't already exist in our [provided API](api/js).
+**首先**，确保您要创建的value在[provided API](api/js)中不存在。
 
 Some JS values, like `setTimeout`, live in the global scope. You can bind to them like so:
+一些全局作用域（global scope）中的JS values，如`setTimeout`，您可以像这样去绑定它们：
 
 <CodeTab labels={["ReScript", "JS Output"]}>
 
@@ -22,19 +23,19 @@ Some JS values, like `setTimeout`, live in the global scope. You can bind to the
 
 </CodeTab>
 
-(We already provide `setTimeout`, `clearTimeout` and others in the [Js.Global](api/js/global) module).
+([Js.Global](api/js/global) 模块已经提供了`setTimeout`, `clearTimeout` 及一些相关的绑定).
 
-This binds to the JavaScript [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrworkerGlobalScope/setTimeout) methods and the corresponding `clearTimeout`. The `external`'s type annotation specifies that `setTimeout`:
+以上的代码绑定了JavaScript中的[`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrworkerGlobalScope/setTimeout)方法以及其对应的方法 [`clearTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout)。其中的 `external` 类型注解（type annotation）对 `setTimeout` 进行了描述：
 
-- Takes a function that accepts `unit` and returns `unit` (which on the JS side turns into a function that accepts nothing and returns nothing aka `undefined`),
-- and an integer that specifies the duration before calling said function,
-- returns a number that is the timeout's ID. This number might be big, so we're modeling it as a float rather than the 32-bit int.
+- 它接收一个接收并返回 `unit` 的函数作为其第一个参数（在JavaScript中，被接收的函数会转化为一个不接受任何参数并无返回值（即 `undefined` ）的函数）
+- 并且会接收一个整数（`int`）作为其第二个参数
+- 它返回一个数字作为timeoutId。由于这个数字可能会很大，因此我们没有选择32位的int作为该数字的类型，而是选择使用float类型。
 
-### Tips & Tricks
+### 小建议
 
-**The above isn't ideal**. See how `setTimeout` returns a `float` and `clearTimeout` accepts one. There's no guarantee that you're passing the float created by `setTimeout` into `clearTimeout`! For all we know, someone might pass it `Math.random()` into the latter.
+**上面的代码并不理想** 虽然我们可以看到 `setTimeout` 会返回一个 `float` 类型的返回值，并且 `clearTimeout` 会接收它。但是，这里并不能保证它一定会将 `setTimeout` 创建的float类型的返回值传递给 `clearTimeout`。就一些已知情况而言，一些人可能会把 `Math.random()` 传给 `clearTimeout` 。
 
-We're in a language with a great type system now! Let's leverage a popular feature to solve this problem: abstract types.
+ReScript是一门具有强大类型系统的语言！因此，让我们来使用一个流行的特性来解决这个问题：抽象类型（abstract types）。
 
 <CodeTab labels={["ReScript", "JS Output"]}>
 
@@ -56,9 +57,9 @@ clearTimeout(id);
 
 </CodeTab>
 
-Clearly, `timerId` is a type that can only be created by `setTimeout`! Now we've guaranteed that `clearTimeout` _will_ be passed a valid ID. Whether it's a number under the hood is now a mere implementation detail.
+如上所示，`timerId` 是一个只会被 `setTimeout` 返回的类型！因此，不论这个数字是什么，我们现在都可以保证 `clearTimeout` _一定会_ 接收到一个有效的timeoutId。
 
-Since `external`s are inlined, we end up with JS output as readable as hand-written JS.
+`external` 是內联的，因此我们最终会得到与手写的代码一样可读的JavaScript代码。
 
 ## Global Modules
 
