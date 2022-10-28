@@ -1,10 +1,10 @@
 ---
-title: "绑定到全局 JS 值"
+title: "绑定到全局JS值"
 description: "JS interop with global JS values in ReScript"
 canonical: "/docs/manual/latest/bind-to-global-js-values"
 ---
 
-# Bind to Global JS Values | 绑定到全局 JS 值
+# Bind to Global JS Values | 绑定到全局JS值
 
 **First**, make sure the value you'd like to model doesn't already exist in our [provided API](api/js).
 
@@ -28,7 +28,7 @@ Some JS values, like `setTimeout`, live in the global scope. You can bind to the
 
 (We already provide `setTimeout`, `clearTimeout` and others in the [Js.Global](api/js/global) module).
 
-我们已经在[Js.Global](api/js/global)模块中提供了`setTimeout`、`clearTimeout`等值。
+（我们已经在[Js.Global](api/js/global)模块中提供了`setTimeout`、`clearTimeout`等值。）
 
 This binds to the JavaScript [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrworkerGlobalScope/setTimeout) methods and the corresponding `clearTimeout`. The `external`'s type annotation specifies that `setTimeout`:
 
