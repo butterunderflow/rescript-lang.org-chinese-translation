@@ -4,10 +4,11 @@ description: "Importing / exporting JS module content in ReScript"
 canonical: "/docs/manual/latest/import-from-export-to-js"
 ---
 
-# Import from/Export to JS
+# Import from/Export to JS | 导入/导出到 JS
 
 You've seen how ReScript's idiomatic [Import & Export](import-export.md) works. This section describes how we work with importing stuff from JavaScript and exporting stuff for JavaScript consumption.
 
+你已经见识到 ReScript 惯用的[导入和导出](import-export.md)是如何工作的了。这段描述了我们是怎么从 JavaScript 中导入
 **Note**: due to JS ecosystem's module compatibility issues, our advice of keeping your ReScript file's compiled JS output open in a tab applies here **more than ever**, as you don't want to subtly output the wrong JS module import/export code, on top of having to deal with Babel/Webpack/Jest/Node's CommonJS<->ES6 compatibility shims.
 
 In short: **make sure your bindings below output what you'd have manually written in JS**.
