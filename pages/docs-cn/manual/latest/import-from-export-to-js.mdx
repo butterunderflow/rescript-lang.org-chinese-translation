@@ -68,15 +68,17 @@ Here's what the `external` does:
 这是 `external` 的作用:
 
 - `@module("path")`: pass the name of the JS module; in this case, `"path"`. The string can be anything: `"./src/myJsFile"`, `"@myNpmNamespace/myLib"`, etc.
-- `@module("path")`: 传递 JS 模块的名称; 在本例中, `"path"`. 可以是任何形式的字符串: `"./src/myJsFile"`, `"@myNpmNamespace/myLib"`, 等等。
 - `external`: the general keyword for declaring a value that exists on the JS side.  
-- `external`: 用于声明存在于 JS 端的值的通用关键字。
 - `dirname`: the binding name you'll use on the ReScript side.  
-- `dirname`: 你将在 ReScript 端使用的绑定名称。
 - `string => string`: the type signature of `dirname`. Mandatory for `external`s.
-- `string => string`: `dirname` 的类型签名， 强制 `external` 的.
 - `= "dirname"`: the name of the variable inside the `path` JS module. There's repetition in writing the first and second `dirname`, because sometime the binding name you want to use on the ReScript side is different than the variable name the JS module exported.
+
+- `@module("path")`: 传递 JS 模块的名称; 在本例中, `"path"`. 可以是任何形式的字符串: `"./src/myJsFile"`, `"@myNpmNamespace/myLib"`, 等等。
+- `external`: 用于声明存在于 JS 端的值的通用关键字。
+- `dirname`: 你将在 ReScript 端使用的绑定名称。
+- `string => string`: `dirname` 的类型签名， 强制 `external` 的.
 - `= "dirname"`: JS 模块 `path` 内的变量名称。在写第一个和第二个 `dirname` 的时候会重复，因为有时您想在 ReScript 端使用的绑定名称与 JS 模块导出的变量名称不同。
+
 
 ### Import a JavaScript Module As a Single Value ｜ 将 JavaScript 模块作为单个值导入
 
@@ -144,7 +146,7 @@ export default name = "Al";
 import studentName from 'student.js';
 ```
 
-A JavaScript default export is really just syntax sugar for a named export implicitly called `default` (now you know!). So to export a default value from ReScript, you can just do:
+A JavaScript default export is really just syntax sugar for a named export implicitly called `default` (now you know!). So to export a default value from ReScript, you can just do:  
 JavaScript 默认导出实际上只是隐式地称为 `default` 的命名导出的语法糖(现在您知道了！)。因此，要从 ReScript 导出默认值，只需执行以下操作:
 
 <CodeTab labels={["ReScript", "JS Output (CommonJS)", "JS Output (ES6)"]}>
