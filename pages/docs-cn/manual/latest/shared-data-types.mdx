@@ -24,43 +24,50 @@ Unlike most compiled-to-js languages, in ReScript, **you don't need to write dat
 
 - String. ReScript strings are JavaScript strings, vice-versa. (Caveat: only our backtick string `` `hello 👋 ${personName}` `` supports unicode and interpolation).
 
-- String. ReScript 字符串是 JavaScript 字符串，反之亦然。(注意: 只有我们的反引号字符串 `` `hello 👋 ${personName}` `` 支持 unicode 和插值)。
-
 - Float. ReScript floats are JS numbers, vice-versa.
-
-- Float. ReScript 浮点型 就是 JS 的数字，反之亦然。
 
 - Array. In addition to the [JS Array API](api/js/array), we provide our own [Belt.Array](api/belt/array#set) API too.
 
-- Array. 除了 [JS Array API](api/js/array) 之外, 我们也提供了 [Belt.Array](api/belt/array#set) API。
-
 - Tuple. Compiles to a JS array. You can treat a fixed-sized, heterogenous JS array as ReScript tuple too.
-
-- Tuple. 编译为一个 JS 数组。 你也可以将固定长度的异构 JS 数组视为 ReScript 元组。
 
 - Boolean.
 
 - Record. Record compiles to JS object. Therefore you can also treat JS objects as records. If they're too dynamic, consider modeling them on the ReScript side as a hashmap/dictionary [`Js.Dict`](api/js/dict) or a ReScript object.
 
-- Record. Record 会编译成 JS 的对象。因此，您也可以将 JS 对象视为记录。如果它们的结构是很动态的，可以考虑在 ReScript 端将它们建模为散列图/字典 [`Js.Dict`](api/js/dict) 或一个 ReScript 对象。
-
 - Object. ReScript objects are JavaScript objects, vice-versa.
-
-- Object. ReScript 对象是 JavaScript 对象，反之亦然。
 
 - Function. They compile to clean JS functions.
 
-- Function. 它们会编译为干净的 JS 函数。
-
 - Module. ReScript files are considered top-level modules, and are compiled to JS files 1 to 1. Nested modules are compiled to JavaScript objects.
+
+- Polymorphic variants.
+
+- Unit. The `unit` type, which has a single value `()`, compiles to `undefined` too. Likewise, you can treat an incoming JS `undefined` as `()` if that's the only value it'll ever be.  
+
+
+
+- String. ReScript 字符串是 JavaScript 字符串，反之亦然。(注意: 只有我们的反引号字符串 `` `hello 👋 ${personName}` `` 支持 unicode 和插值)。
+
+- Float. ReScript 浮点型 就是 JS 的数字，反之亦然。
+
+- Array. 除了 [JS Array API](api/js/array) 之外, 我们也提供了 [Belt.Array](api/belt/array#set) API。
+
+- Tuple. 编译为一个 JS 数组。 你也可以将固定长度的异构 JS 数组视为 ReScript 元组。
+
+- Boolean.
+
+- Record. Record 会编译成 JS 的对象。因此，您也可以将 JS 对象视为记录。如果它们的结构是很动态的，可以考虑在 ReScript 端将它们建模为散列图/字典 [`Js.Dict`](api/js/dict) 或一个 ReScript 对象。
+
+- Object. ReScript 对象是 JavaScript 对象，反之亦然。
+
+- Function. 它们会编译为干净的 JS 函数。
 
 - Module. ReScript 文件被认为是顶级模块，并被 1 比 1 的编译为 JS 文件。嵌套的模块被编译成 JavaScript 对象。
 
 - Polymorphic variants.
 
-- Unit. The `unit` type, which has a single value `()`, compiles to `undefined` too. Likewise, you can treat an incoming JS `undefined` as `()` if that's the only value it'll ever be.
-
 - Unit. `unit` 类型, 只有一个单独的值 `()`, 也会编译为 `undefined`。 同样，您也可以处理传入 JS 的 `undefined` 作为 `()`，如果这是它唯一的价值。
+
 
 **Types that are slightly different than JS, but that you can still use from JS**:
 
@@ -68,20 +75,26 @@ Unlike most compiled-to-js languages, in ReScript, **you don't need to write dat
 
 - Int. **Ints are 32-bits**! Be careful, you can potentially treat them as JS numbers and vice-versa, but if the number's large, then you better treat JS numbers as floats. For example, we bind to Js.Date using `float`s.
 
-- Int. **IInt 是 32 位的！**! 小心, 你可以把它们看作 JS 数字，反之亦然，但是如果数字很大，那么您最好将 JS 数字视为浮点数。 例如, 我们绑定 Js.Date 使用了 `float` 。
-
 - Option. The `option` type's `None` value compiles into JS `undefined`. The `Some` value, e.g. `Some(5)`, compiles to `5`. Likewise, you can treat an incoming JS `undefined` as `None`. **JS `null` isn't handled here**. If your JS value can be `null`, use [Js.Nullable](api/js/nullable) helpers.
+
+- Exception.
+
+- Variant. Check the compiled JavaScript output of variant to see its shape. We don't recommend exporting a ReScript variant for pure JS usage, since they're harder to read as plain JS code, but you can do it.
+
+- List, which is just a regular variant.
+
+
 
 - Option. `option` 类型的 `None` 值会编译为 JS 的 `undefined`。 `Some` 的值， e.g. `Some(5)`， 编译为 `5`。同样，您可以将传入的 JS `undefined` 作为 `None`。 \*\*这里不处理 JS `null` 。 如果你的 JS 值可以为 `null`， 用 [Js.Nullable](api/js/nullable) 处理。
 
 - Exception.
-- Variant. Check the compiled JavaScript output of variant to see its shape. We don't recommend exporting a ReScript variant for pure JS usage, since they're harder to read as plain JS code, but you can do it.
+
+- Int. **IInt 是 32 位的！**! 小心, 你可以把它们看作 JS 数字，反之亦然，但是如果数字很大，那么您最好将 JS 数字视为浮点数。 例如, 我们绑定 Js.Date 使用了 `float` 。
 
 - Variant. 检查变体已编译 JavaScript 输出以查看其形状。 我们不建议为单纯为 JS 使用导出 ReScript 变体，因为它们很难被理解为普通的 JS 代码，但是你可以这么做。
 
-- List, which is just a regular variant.
-
 - List, 这只是一个普通的变体。
+
 
 **Non-shared types (aka internal types)**:
 
