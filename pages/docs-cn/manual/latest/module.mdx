@@ -481,34 +481,34 @@ type state = int
 let render: string => string
 ```
 
-## Module Functions (functors) | 模块函数（函子）
+## Module Functions (functors) | 模块函数（仿函数）
 
 Modules can be passed to functions! It would be the equivalent of passing a file
 as a first-class item. However, modules are at a different "layer" of the
 language than other common concepts, so we can't pass them to *regular*
 functions. Instead, we pass them to special functions called "functors".
 
-模块可以传递函数！它相当于将文件作为第一类子项传递。但是，模块与其他常见概念在语言的“层”上是不同的，因此我们不能将它们传递给常规函数。相反，我们将它们传递给称为“函子”的特殊函数。
+模块可以传递函数！它相当于将文件作为第一类子项传递。但是，模块与其他常见概念在语言的“层”上是不同的，因此我们不能将它们传递给常规函数。相反，我们将它们传递给称为“仿函数”的特殊函数。
 
 The syntax for defining and using functors is very much like the syntax
 for defining and using regular functions. The primary differences are:
 
-用于定义和使用函子的语法和使用常规函数非常类似，主要区别是：
+用于定义和使用仿函数的语法和使用常规函数非常类似，主要区别是：
 
 - Functors use the `module` keyword instead of `let`.
 - Functors take modules as arguments and return a module.
 - Functors *require* annotating arguments.
 - Functors must start with a capital letter (just like modules/signatures).
 
-- 函子使用 `module` 关键字替代 `let`。
-- 函子将模块作为参数并返回一个模块。
-- 函子*需要*注释参数。
-- 函子必须以大写字母开头（就像模块/签名一样）。
+- 仿函数使用 `module` 关键字替代 `let`。
+- 仿函数将模块作为参数并返回一个模块。
+- 仿函数*需要*注释参数。
+- 仿函数必须以大写字母开头（就像模块/签名一样）。
 
 Here's an example `MakeSet` functor, that takes in a module of the type
 `Comparable` and returns a new set that can contain such comparable items.
 
-下面是一个 `MakeSet` 函子实例，它接受类型为 `Comparable` 的模块，并返回一个新的集合，该集合包含 comparable 子项。
+下面是一个 `MakeSet` 仿函数实例，它接受类型为 `Comparable` 的模块，并返回一个新的集合，该集合包含 comparable 子项。
 
 <CodeTab labels={["ReScript", "JS Output"]}>
 
@@ -564,7 +564,7 @@ function MakeSet(Item) {
 Functors can be applied using function application syntax. In this case, we're
 creating a set, whose items are pairs of integers.
 
-函子可以使用函数应用程序语法。在本例中，我们创建了一个集合，他的子项为整数对。
+仿函数可以使用函数应用程序语法。在本例中，我们创建了一个集合，他的子项为整数对。
 
 <CodeTab labels={["ReScript", "JS Output"]}>
 
@@ -613,7 +613,7 @@ modules the functor accepts as arguments and return values. In the
 previous example, we're exposing the backing type of a set; by giving `MakeSet`
 a functor signature, we can hide the underlying data structure!
 
-与模块类型一样，函子类型也起到约束和隐藏函子的作用。函子类型的语法与函数类型的语法一致，但是大写的类型表示模块的签名，函子接受参数，并且返回一个值。在签名的实例中，我们公开了一个集合的支持类型，通过给 `MakeSet` 一个函数签名，我们可以隐藏底层的数据结构！
+与模块类型一样，仿函数类型也起到约束和隐藏仿函数的作用。仿函数类型的语法与函数类型的语法一致，但是大写的类型表示模块的签名，仿函数接受参数，并且返回一个值。在签名的实例中，我们公开了一个集合的支持类型，通过给 `MakeSet` 一个函数签名，我们可以隐藏底层的数据结构！
 
 <CodeTab labels={["ReScript", "JS Output"]}>
 
@@ -657,4 +657,4 @@ Please note that modules with an exotic filename will not be accessible from oth
 
 Modules and functors are at a different "layer" of language than the rest (functions, let bindings, data structures, etc.). For example, you can't easily pass them into a tuple or record. Use them judiciously, if ever! Lots of times, just a record or a function is enough.
 
-模块和函子与其他语言（函数、let 绑定、数据结构等）处于不同的“层”。例如，你不能轻易的将它们传递到元祖或记录中。如果需要的话，要谨慎的使用它们！多次使用，只需要一个记录或一个函数就够了。
+模块和仿函数与语言的其他部分（函数、let 绑定、数据结构等）处于不同的“层”。例如，你不能轻易的将它们传递到元祖或记录中。如果需要的话，要谨慎的使用它们！多次使用，只需要一个记录或一个函数就够了。
