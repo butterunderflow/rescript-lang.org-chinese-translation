@@ -44,6 +44,8 @@ jobs:
         run: npm run build
       - name: Setup Pages
         run: npx next build && npx next export -o gh-pages
+      - name: Overwrite index.html
+        run: cp -f gh-pages/docs-cn/manual/latest/introduction.html gh-pages/index.html
       - name: Create .nojekyll # make gighub trust _next/* file can
         run: touch gh-pages/.nojekyll
       - name: Upload artifact
@@ -55,7 +57,7 @@ jobs:
         uses: tagus/git-deploy@v0.4.1
         with:
           changes: gh-pages
-          repository: git@github.com:rescript-idea/rescript-lang-zh-static.git
+          repository: git@github.com:rescript-idea/rescript-idea.github.io.git
           ssh_key: ${{ secrets.SSH_DEPLOY_KEY }}
           branch: master
           name: deploy-bot
