@@ -44,14 +44,15 @@ function ManualDocsLayout$Latest(Props) {
   var url = Url.parse(route);
   var version = url.version;
   var version$1 = typeof version === "number" ? "latest" : version._0;
+  var title = lang ? "语言手册" : "Language Manual";
   var breadcrumbs_0 = {
-    name: "Docs",
+    name: "文档",
     href: "/docs/" + version$1
   };
   var breadcrumbs_1 = {
     hd: {
-      name: "Language Manual",
-      href: "/docs/manual/" + (version$1 + "/introduction")
+      name: title,
+      href: "/docs-cn/manual/" + (version$1 + "/introduction")
     },
     tl: /* [] */0
   };
@@ -59,13 +60,12 @@ function ManualDocsLayout$Latest(Props) {
     hd: breadcrumbs_0,
     tl: breadcrumbs_1
   };
-  var title = "Language Manual";
   var version$2 = "latest";
   if (lang) {
     var tmp = {
       breadcrumbs: breadcrumbs,
       title: title,
-      metaTitleCategory: "ReScript Language Manual",
+      metaTitleCategory: "ReScript 语言手册",
       version: version$2,
       components: components,
       theme: "Reason",
@@ -107,13 +107,13 @@ function ManualDocsLayout$V900(Props) {
   var version = url.version;
   var version$1 = typeof version === "number" ? "latest" : version._0;
   var breadcrumbs_0 = {
-    name: "Docs",
+    name: "文档",
     href: "/docs/" + version$1
   };
   var breadcrumbs_1 = {
     hd: {
-      name: "Language Manual",
-      href: "/docs/manual/" + (version$1 + "/introduction")
+      name: "语言手册",
+      href: "/docs-cn/manual/" + (version$1 + "/introduction")
     },
     tl: /* [] */0
   };
@@ -152,13 +152,13 @@ function ManualDocsLayout$V800(Props) {
   var version = url.version;
   var version$1 = typeof version === "number" ? "latest" : version._0;
   var breadcrumbs_0 = {
-    name: "Docs",
+    name: "文档",
     href: "/docs/" + version$1
   };
   var breadcrumbs_1 = {
     hd: {
-      name: "Language Manual",
-      href: "/docs/manual/" + (version$1 + "/introduction")
+      name: "语言手册",
+      href: "/docs-cn/manual/" + (version$1 + "/introduction")
     },
     tl: /* [] */0
   };

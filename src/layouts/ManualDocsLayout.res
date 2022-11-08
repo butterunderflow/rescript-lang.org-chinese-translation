@@ -32,21 +32,26 @@ module Latest = {
     | Latest => "latest"
     }
 
+    let title = switch lang {
+      | LangUtil.English => "Language Manual"
+      | LangUtil.Chinese => "语言手册"
+    } 
+
+
     let breadcrumbs = list{
       {
         open Url
-        {name: "Docs", href: "/docs/" ++ version}
+        {name: "文档", href: "/docs/" ++ version}
       },
       {
         open Url
         {
-          name: "Language Manual",
-          href: "/docs/manual/" ++ (version ++ "/introduction"),
+          name: title,
+          href: "/docs-cn/manual/" ++ (version ++ "/introduction"),
         }
       },
     }
 
-    let title = "Language Manual"
     let version = "latest"
 
     open LangUtil
@@ -69,7 +74,7 @@ module Latest = {
         components
         version
         title
-        metaTitleCategory="ReScript Language Manual"
+        metaTitleCategory="ReScript 语言手册"
         ?frontmatter
         breadcrumbs>
         children
@@ -95,13 +100,13 @@ module V900 = {
     let breadcrumbs = list{
       {
         open Url
-        {name: "Docs", href: "/docs/" ++ version}
+        {name: "文档", href: "/docs/" ++ version}
       },
       {
         open Url
         {
-          name: "Language Manual",
-          href: "/docs/manual/" ++ (version ++ "/introduction"),
+          name: "语言手册",
+          href: "/docs-cn/manual/" ++ (version ++ "/introduction"),
         }
       },
     }
@@ -139,13 +144,13 @@ module V800 = {
     let breadcrumbs = list{
       {
         open Url
-        {name: "Docs", href: "/docs/" ++ version}
+        {name: "文档", href: "/docs/" ++ version}
       },
       {
         open Url
         {
-          name: "Language Manual",
-          href: "/docs/manual/" ++ (version ++ "/introduction"),
+          name: "语言手册",
+          href: "/docs-cn/manual/" ++ (version ++ "/introduction"),
         }
       },
     }

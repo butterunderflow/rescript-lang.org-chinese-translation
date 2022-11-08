@@ -27,20 +27,20 @@ let default = (~showVersionSelect=true) => {
   }
 
   let languageManual = [
-    ("Overview", j` /docs/manual/$version/introduction`),
-    ("Language Features", j`/docs/manual/$version/overview`),
-    ("JS Interop", j`/docs/manual/$version/embed-raw-javascript`),
-    ("Build System", j`/docs/manual/$version/build-overview`),
+    ("概览", j` /docs-cn/manual/$version/introduction`),
+    ("语言特性", j`/docs-cn/manual/$version/overview`),
+    ("与 JS 互操作", j`/docs-cn/manual/$version/embed-raw-javascript`),
+    ("构建系统", j`/docs-cn/manual/$version/build-overview`),
   ]
 
   let ecosystem = [
-    ("Package Index", "/packages"),
+    // ("Package Index", "/packages"),
     ("rescript-react", "/docs/react/latest/introduction"),
     ("GenType", "/docs/gentype/latest/introduction"),
     ("Reanalyze", "https://github.com/reason-association/reanalyze"),
   ]
 
-  let tools = [("Syntax Lookup", "/syntax-lookup")]
+  let tools = [("语法查找", "/syntax-lookup")]
 
   let versionSelect = if showVersionSelect {
     let onChange = evt => {
@@ -63,13 +63,13 @@ let default = (~showVersionSelect=true) => {
   }
 
   <>
-    <div>
-      versionSelect <div className="mb-6" /> <Markdown.H1> {React.string("Docs")} </Markdown.H1>
-    </div>
+    // <div>
+    //   versionSelect <div className="mb-6" /> <Markdown.H1> {React.string("文档")} </Markdown.H1>
+    // </div>
     <div className="grid grid-cols-1 xs:grid-cols-2 gap-8">
-      <Card title="Language Manual" hrefs=languageManual />
-      <Card title="Ecosystem" hrefs=ecosystem />
-      <Card title="Tools" hrefs=tools />
+      <Card title="语言手册" hrefs=languageManual />
+      <Card title="生态系统" hrefs=ecosystem />
+      <Card title="工具" hrefs=tools />
     </div>
   </>
 }
