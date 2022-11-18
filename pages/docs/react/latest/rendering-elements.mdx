@@ -1,42 +1,54 @@
 ---
-title: Rendering Elements
-description: "How to render React elements to the DOM"
+title: 渲染元素
+description: "将React元素渲染到DOM的方法"
 canonical: "/docs/react/latest/rendering-elements"
 ---
 
-# Rendering Elements
+<!-- # Rendering Elements -->
+# 渲染元素
 
 <Intro>
 
-In our previous section [React Elements & JSX](./elements-and-jsx) we learned how to create and handle React elements. In this section we will learn how to put our elements into action by rendering them into the DOM.
+<!-- In our previous section [React Elements & JSX](./elements-and-jsx) we learned how to create and handle React elements. In this section we will learn how to put our elements into action by rendering them into the DOM. -->
+在上节[元素和JSX](./elements-and-jsx)中，我们学习了如何创建和操作React元素。本节中，我们将学习如何将React元素渲染到DOM。
 
 </Intro>
 
-As we mentioned before, a `React.element` describes what you see on the screen:
+<!-- As we mentioned before, a `React.element` describes what you see on the screen: -->
+我们之前提到，`React.element` 描述了你能在屏幕上看到的内容。
 
 ```res
 let element = <h1> {React.string("Hello World")} </h1>
 ```
 
-Unlike browser DOM elements, React elements are plain objects, and are cheap to create. React DOM takes care of updating the DOM to match the React elements.
+<!-- Unlike browser DOM elements, React elements are plain objects, and are cheap to create. React DOM takes care of updating the DOM to match the React elements. -->
+不像浏览器的DOM元素，React元素是普通对象，创建成本很低。React DOM负责根据React元素来更新DOM。
 
-## Rendering Elements to the DOM
+<!-- ## Rendering Elements to the DOM -->
+## 渲染元素到DOM
 
-Let's assume we've got an HTML file that contains a `div` like this:
+<!-- Let's assume we've got an HTML file that contains a `div` like this: -->
+假设我们的HTML文件内有个像这样的 `div` ：
 
 ```html
 <div id="root"/>
 ```
 
-We call this a “root” DOM node because everything inside it will be managed by React DOM.
+<!-- We call this a “root” DOM node because everything inside it will be managed by React DOM. -->
+我们称之为“根”DOM节点，该节点下所有的内容将被React DOM管理。
 
-Plain React applications usually have a single root DOM node. If you are integrating React into an existing app, you may have as many isolated root DOM nodes as you like.
+<!-- Plain React applications usually have a single root DOM node. If you are integrating React into an existing app, you may have as many isolated root DOM nodes as you like. -->
+普通的React应用程序通常只有一个根DOM节点。如果你正在将React集成到一个现有的应用程序中，那么你可以拥有任意数量的独立的根DOM节点。
 
-To render our React application into the `root` div, we need to do two things:
+<!-- To render our React application into the `root` div, we need to do two things:
 - Find our DOM node with `ReactDOM.querySelector`
-- Render our React element to our queried `Dom.element` with `ReactDOM.render`
+- Render our React element to our queried `Dom.element` with `ReactDOM.render` -->
+我们需要两个步骤来将React应用程序渲染到 `root` div节点：
+- 通过 `ReactDOM.querySelector` 找到DOM节点到位置
+- 使用 `ReactDOM.render` 将React元素渲染到 `Dom.element` 上
 
-Here is a full example rendering our application in our `root` div:
+<!-- Here is a full example rendering our application in our `root` div: -->
+将应用程序渲染到 `root` div的例子： 
 
 <CodeTab labels={["ReScript", "JS Output"]}>
 
@@ -58,8 +70,12 @@ if (!(root == null)) {
 
 </CodeTab>
 
-React elements are immutable. Once you create an element, you can’t change its children or attributes. An element is like a single frame in a movie: it represents the UI at a certain point in time.
+<!-- React elements are immutable. Once you create an element, you can’t change its children or attributes. An element is like a single frame in a movie: it represents the UI at a certain point in time. -->
+React元素是不可变的。当你创建了一个React元素后，你就不能改变它的子元素或属性。React元素就像一部电影里的一帧：它表示了某个时间点的UI。
 
-At this point we would need to understand a few more concepts, such as React components and state management to be able to update the rendered elements after the initial `ReactDOM.render`. For now, just imagine your React application as a tree of elements, whereby some elements may get replaced during the lifetime of your application.
+<!-- At this point we would need to understand a few more concepts, such as React components and state management to be able to update the rendered elements after the initial `ReactDOM.render`. For now, just imagine your React application as a tree of elements, whereby some elements may get replaced during the lifetime of your application. -->
+如果要在初始的 `ReactDOM.render` 之后更新React元素，我们需要理解更多概念，例如React组件和状态管理。现在，只需将你的React应用程序想象成一个元素树，在应用程序的生命周期内可以替换一些元素。
 
-React will automatically recognize any element changes and will only apply the DOM updates necessary to bring the DOM to the desired state.
+
+<!-- React will automatically recognize any element changes and will only apply the DOM updates necessary to bring the DOM to the desired state. -->
+React会自动识别元素的变更，并只更新必要的DOM来匹配当前状态。
