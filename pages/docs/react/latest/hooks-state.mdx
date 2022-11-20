@@ -40,13 +40,13 @@ var setState = match[1];
 初始渲染过程中，被返回的 `state` 和作为第一个参数传给 `React.useState` 的 initialState 一样。
 
 <!-- The `setState` function can be passed down to other components as well, which is useful for e.g. setting the state of a parent component by its children. -->
-`setState` 函数也可以传给其他组件，对于通过子组件设置父组件的状态非常有用。
+`setState` 函数也可以传给其他组件，对于通过子组件设置父组件的 state 非常有用。
 
 <!-- ## Examples -->
 ## 示例
 
 <!-- ### Using State for a Text Input -->
-### 为文本输入添加状态
+### 为文本输入添加 State
 
 ```res
 @react.component
@@ -69,7 +69,7 @@ let make = () => {
 ### 将 `setState` 传给子组件
 
 <!-- In this example, we are creating a `ThemeContainer` component that manages a `darkmode` boolean state and passes the `setDarkmode` function to a `ControlPanel` component to trigger the state changes. -->
-这个例子中，我们正在创建 `ThemeContainer` 组件，用于管理 `darkmode` boolean 状态，以及将 `setDarkmode` 函数传给 `ControlPanel` 组件来触发状态变更。
+这个例子中，我们正在创建 `ThemeContainer` 组件，用于管理 `darkmode` state，以及将 `setDarkmode` 函数传给 `ControlPanel` 组件来触发 state 变更。
 
 
 <CodeTab labels={["ReScript", "JS Output"]}>
