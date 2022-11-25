@@ -10,15 +10,15 @@ canonical: "/docs/react/latest/beyond-jsx"
 <Intro>
 
 <!-- JSX is a syntax sugar that allows us to use React components in an HTML like manner. A component needs to adhere to certain interface conventions, otherwise it can't be used in JSX. This section will go into detail on how the JSX transformation works and what React APIs are used underneath. -->
-JSX 是一个语法糖，允许我们以类似 HTML 的方式组合 React 组件。要使用 JSX，组件需要遵循某些接口约定。本节会深入 JSX 转换的细节，以及 JSX 底层使用的 React API。
+JSX 是一个语法糖，允许我们以类似 HTML 的方式组合 React 组件。要使用 JSX，组件需要遵循某些接口约定。本章节会深入 JSX 转换的细节，以及 JSX 底层使用的 React API。
 
 </Intro>
 
 <!-- **Note:** This section requires knowledge about the low level apis for [creating elements](./elements-and-jsx#creating-elements-from-component-functions), such as `React.createElement` or `ReactDOMRe.createDOMElementVariadic`. -->
-**注意：**本章需要你了解 [创建元素](./elements-and-jsx#creating-elements-from-component-functions) 的底层 API，例如 `React.createElement` 或 `ReactDOMRe.createDOMElementVariadic`。
+**注意**：本章需要你了解 [创建元素](./elements-and-jsx#creating-elements-from-component-functions) 的底层 API，例如 `React.createElement` 或 `ReactDOMRe.createDOMElementVariadic`。
 
 <!-- > **Note:** This page assumes your `bsconfig.json` to be set to `"reason": { "react-jsx": 3 }` to apply the right JSX transformations.  -->
-**注意：**本章假设你的 `bsconfig.json` 拥有 `"reason": { "react-jsx": 3 }`设置，从而能够正确应用 JSX 转换。
+**注意**：本章假设你的 `bsconfig.json` 拥有 `"reason": { "react-jsx": 3 }`设置，从而能够正确应用 JSX 转换。
 
 <!-- ## Component Types -->
 ## 组件类型
@@ -49,7 +49,7 @@ type containerComp =
 ## JSX 组件接口
 
 <!-- A ReScript React component needs to be a (sub-)module with a `make` and `makeProps` function to be usable in JSX. To make things easier, we provide a `@react.component` decorator to create those functions for you: -->
-ReScript React 组件需要是一个（子）模块，有被 JSX 使用的 `make` 和 `makeProps` 函数。为了提高开发效率，我们提供一个 `@react.component` 装饰器来为你创建这些函数：
+ReScript React 组件是一个（子）模块，含有被 JSX 使用的 `make` 和 `makeProps` 函数。为了更好的使用体验，我们提供一个 `@react.component` 装饰器来为你创建这些函数：
 
 <CodeTab labels={["Decorated", "Expanded"]}>
 
@@ -93,7 +93,7 @@ module Friend = {
 - `make`：一个转换后的 `make` 函数，编译到组件接口 `(props) => React.element`。
 
 <!-- **Note:** The `makeProps` function will also always contain a `~key` prop. -->
-**注意：** `makeProps` 函数总会包含一个 `~key` prop。
+**注意**： `makeProps` 函数总会包含一个 `~key` 参数。
 
 <!-- ### Special Case React.forwardRef -->
 ### 特殊情况 React.forwardRef
@@ -143,7 +143,7 @@ module FancyInput = {
 </CodeTab>
 
 <!-- As shown in the expanded output above, our decorator desugars the function passed to `React.forwardRef` in the same manner as a typical component `make` function. It also creates a `makeProps` function with a `ref` prop, so we can use it in our JSX call (`<FancyInput ref=.../>`). -->
-就像上面的被扩展后的输出，装饰器转换传给 `React.forwardRef` 的函数，就像转换典型的组件 `make` 函数一样。它也会创建一个 `makeProps` 函数，而且会添加 `ref` prop，便于我们在 JSX 调用时使用（`<FancyInput ref=.../>`）。
+就像上面的被扩展后的输出，装饰器会转换传给 `React.forwardRef` 的函数，就像转换典型的组件 `make` 函数一样。它也会创建一个 `makeProps` 函数，而且会添加 `ref` prop，便于我们在 JSX 调用时使用（`<FancyInput ref=.../>`）。
 
 <!-- So now that we know how the ReScript React component transformation works, let's have a look on how ReScript transforms our JSX constructs. -->
 现在，我们明白了 ReScript React 组件是如何转换的，让我们接着看看 ReScript 如何转换 JSX 结构。
@@ -169,7 +169,7 @@ React.createElement(Playground$Friend, { name: "Fred", age: 20 });
 </CodeTab>
 
 <!-- As you can see, it uses `Friend.make` and `Friend.makeProps` to call the `React.createElement` API. In case you are providing children, it will use `React.createElementVariadic` instead (which is just a different binding for `React.createElement`): -->
-如你所见，它使用 `Friend.make` 和 `Friend.makeProps` 调用 `React.createElement` API。如果你提供了子元素，它会调用 `React.createElementVariadic`（只是 `React.createElement` 的一个不同绑定）：
+如你所见，它使用 `Friend.make` 和 `Friend.makeProps` 调用 `React.createElement` API。如果你提供了子元素，它会调用 `React.createElementVariadic`（`React.createElement` 的一个不同绑定）：
 
 <CodeTab labels={["JSX", "Without JSX", "JS Output"]}>
 
@@ -195,7 +195,7 @@ React.createElement(Container, { width: 200, children: null }, "Hello", "World")
 </CodeTab>
 
 <!-- Note that the `~children=React.null` prop has no relevance since React will only care about the children array passed as a third argument. -->
-注意，`~children=React.null` 属性没有意义，因为 React 只关心作为第三个参数传递的子元素数组。
+注意，`~children=React.null` 属性没有意义，因为 React 只关心传递给第三个参数的子元素数组。
 
 
 <!-- ### Dom Elements -->
@@ -221,7 +221,7 @@ ReactDOMRe.createDOMElementVariadic("div", ~props=ReactDOMRe.domProps(~title="te
 </CodeTab>
 
 <!-- The same goes for uncapitalized JSX with children: -->
-有子元素的也是一样：
+有子元素的 JSX 也一样：
 
 <CodeTab labels={["JSX", "Without JSX", "JS Output"]}>
 
